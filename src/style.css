@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@akong/ui/styles/shadcn.css";
+
+@source "../node_modules/@akong/ui/src/**/*.{vue,js}";
+@source "../node_modules/.pnpm/@akong+ui@file+*/node_modules/@akong/ui/src/**/*.{vue,js}";
