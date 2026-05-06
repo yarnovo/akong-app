@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { Icon } from '@akong/ui'
 import { listConversations } from '../api.js'
 
 const router = useRouter()
@@ -33,9 +34,9 @@ onMounted(refresh)
 <template>
   <div class="h-full flex flex-col">
     <header class="shrink-0 flex items-center px-4 py-3 border-b border-border bg-card">
-      <span class="text-xs">⊞</span>
+      <button class="text-muted-foreground"><Icon name="menu" :size="20" /></button>
       <h1 class="flex-1 text-center text-base font-semibold">对话</h1>
-      <span class="text-xs">🔍</span>
+      <button class="text-muted-foreground"><Icon name="search" :size="20" /></button>
     </header>
 
     <div class="flex-1 overflow-y-auto" data-testid="conv-list">
@@ -45,7 +46,7 @@ onMounted(refresh)
       <button v-for="item in items" :key="`${item.scope}-${item.target}`"
               @click="openConv(item)"
               class="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-muted active:bg-accent border-b border-border"
-              :class="item.pinned && 'bg-secondary'"
+              :class="item.pinned && 'bg-secondary/50'"
               :data-testid="`conv-${item.target}`">
         <div class="shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-base"
              :style="{ backgroundColor: item.avatar_color }">
@@ -58,7 +59,7 @@ onMounted(refresh)
           </div>
           <div class="text-sm text-muted-foreground truncate mt-0.5">{{ item.last_msg_preview || item.title }}</div>
         </div>
-        <span v-if="item.unread_count" class="shrink-0 w-5 h-5 rounded-full bg-destructive text-white text-xs flex items-center justify-center">{{ item.unread_count }}</span>
+        <span v-if="item.unread_count" class="shrink-0 min-w-[18px] h-[18px] px-1 rounded-full bg-destructive text-white text-[10px] flex items-center justify-center">{{ item.unread_count }}</span>
       </button>
     </div>
   </div>

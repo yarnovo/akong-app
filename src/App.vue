@@ -1,15 +1,16 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
+import { Icon } from '@akong/ui'
 
 const route = useRoute()
 const router = useRouter()
 
-// 4 个 tab · 跟豆包对齐 (简化 5→3)
+// 3 tab · Lucide icon (跟豆包对齐 · 但用统一 SVG · 不用 emoji)
 const tabs = [
-  { name: 'list',   label: '对话',     icon: '💬' },
-  { name: 'agents', label: '智能体',   icon: '🤖' },
-  { name: 'me',     label: '我的',     icon: '👤' },
+  { name: 'list',   label: '对话',   icon: 'messageCircle' },
+  { name: 'agents', label: '智能体', icon: 'handshake' },
+  { name: 'me',     label: '我的',   icon: 'user' },
 ]
 
 const showTabs = computed(() => ['list', 'agents', 'me'].includes(route.name))
@@ -23,10 +24,10 @@ const showTabs = computed(() => ['list', 'agents', 'me'].includes(route.name))
     <nav v-if="showTabs" class="shrink-0 flex border-t border-border bg-card" data-testid="tabbar">
       <button v-for="t in tabs" :key="t.name"
               @click="router.push({ name: t.name })"
-              class="flex-1 flex flex-col items-center py-2 text-xs gap-0.5"
+              class="flex-1 flex flex-col items-center py-2 text-[11px] gap-0.5"
               :class="route.name === t.name ? 'text-primary' : 'text-muted-foreground'"
               :data-testid="`tab-${t.name}`">
-        <span class="text-base">{{ t.icon }}</span>
+        <Icon :name="t.icon" :size="22" />
         <span>{{ t.label }}</span>
       </button>
     </nav>

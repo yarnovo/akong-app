@@ -68,7 +68,7 @@ onMounted(load)
       :subtitle="conv.title"
       :online="!sending"
       :messages="messages"
-      :input-disabled="sending || !BACKEND_READY"
+      :input-disabled="sending"
       @send="send"
       @back="router.push({ name: 'list' })"
       @settings="() => {}"
